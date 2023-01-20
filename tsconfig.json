@@ -1,11 +1,19 @@
 // prettier-ignore
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
+  "extends": "@tsconfig/react-native/tsconfig.json" /* Recommended React Native TSConfig base */,
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Completeness */
     "skipLibCheck": true,
-     "types": ["node"]                               /* Skip type checking all .d.ts files. */
-  }
+    
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@env": ["node_modules/react-native-dotenv"] // this mapping is relative to "baseUrl"
+      } ,/* Skip type checking all .d.ts files. */
+    "types": ["node"],
+    "typeRoots": ["./src/types"],
+  },
+  
 }

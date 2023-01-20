@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_KEY = process.env.REACT_APP_API_KEY;
+import {API_KEY} from '@env';
 
 const movieDB = axios.create({
   baseURL: 'https://api.themoviedb.org/3/movie',
@@ -9,3 +8,5 @@ const movieDB = axios.create({
     language: 'es-ES',
   },
 });
+
+export default movieDB;
