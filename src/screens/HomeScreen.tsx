@@ -5,6 +5,7 @@ import {useMovies} from '../hooks/useMovies';
 
 export const HomeScreen = () => {
   const {peliculasEnCine, isLoading} = useMovies();
+  console.log(peliculasEnCine[0].title);
 
   if (isLoading) {
     return (
