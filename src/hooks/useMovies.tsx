@@ -1,4 +1,3 @@
-import {getRandomValues} from 'crypto';
 import React, {useEffect, useState} from 'react';
 import movieDB from '../api/movieDB';
 import {MovieDBNowPlaying, Movie} from '../interfaces/movieInterface';
