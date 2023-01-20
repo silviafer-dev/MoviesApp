@@ -1,5 +1,6 @@
+// @ts-ignore
 import axios from 'axios';
-import {API_KEY} from '@env';
+import {API_KEY} from 'react-native-dotenv';
 
 const movieDB = axios.create({
   baseURL: 'https://api.themoviedb.org/3/movie',
