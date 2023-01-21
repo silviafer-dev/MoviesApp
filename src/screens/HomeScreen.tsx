@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
@@ -18,7 +19,13 @@ export const HomeScreen = () => {
 
   return (
     <View style={{marginTop: top + 20}}>
-      <MoviePoster movie={peliculasEnCine[1]} />
+      <Carousel
+        width={300}
+        height={420}
+        data={peliculasEnCine}
+        renderItem={({item}) => <MoviePoster movie={item} />}
+      />
+      {/*  */}
     </View>
   );
 };
