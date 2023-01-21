@@ -9,7 +9,7 @@ interface Props {
 export const MoviePoster = ({movie}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   return (
-    <View style={{width: 200, height: 400}}>
+    <View style={{width: 250, height: 400}}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
