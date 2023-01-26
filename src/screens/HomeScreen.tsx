@@ -40,7 +40,7 @@ export const HomeScreen = () => {
               // How the "main" item will look
               parallaxScrollingScale: 0.9,
               // How separate the adjacent items will be
-              parallaxScrollingOffset: 50,
+              parallaxScrollingOffset: 30,
               // How big the adjacent items will look compared to the "main" item
               parallaxAdjacentItemScale: 0.75,
             }}
@@ -49,8 +49,8 @@ export const HomeScreen = () => {
           />
         </View>
 
-        <HorizontalSlider title={'En cines'} movies={peliculasEnCine} />
-        <HorizontalSlider title={'Top'} movies={peliculasEnCine} />
+        <HorizontalSlider title="En cine" movies={peliculasEnCine} />
+        <HorizontalSlider movies={peliculasEnCine} />
       </View>
     </ScrollView>
   );
