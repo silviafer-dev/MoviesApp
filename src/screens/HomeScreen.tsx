@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, ActivityIndicator, Dimensions, Text} from 'react-native';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {View, ActivityIndicator, Dimensions} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {HorizontalSlider} from '../components/HorizontalSlider';
+
 import {MoviePoster} from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
 
@@ -46,30 +48,9 @@ export const HomeScreen = () => {
             renderItem={({item}) => <MoviePoster movie={item} />}
           />
         </View>
-        <View style={{height: 260}}>
-          <Text>En Cines</Text>
-          <FlatList
-            data={peliculasEnCine}
-            renderItem={({item}) => (
-              <MoviePoster movie={item} width={140} height={200} />
-            )}
-            keyExtractor={item => item.id.toString()}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <View style={{height: 250}}>
-          <Text>En Cines</Text>
-          <FlatList
-            data={peliculasEnCine}
-            renderItem={({item}) => (
-              <MoviePoster movie={item} width={140} height={200} />
-            )}
-            keyExtractor={item => item.id.toString()}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
+
+        <HorizontalSlider title={'En cines'} movies={peliculasEnCine} />
+        <HorizontalSlider title={'Top'} movies={peliculasEnCine} />
       </View>
     </ScrollView>
   );
