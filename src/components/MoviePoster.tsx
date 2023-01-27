@@ -4,6 +4,8 @@ import {View, Image, StyleSheet} from 'react-native';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Movie} from '../interfaces/movieInterface';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParams} from 'src/navigation/Navigation';
 
 interface Props {
   movie: Movie;
@@ -19,9 +21,11 @@ export const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        // navigation.navigate('DetailScreen' as never, movie as never)
+        // navigation.navigate('DetailScreen', movie)
         navigation.dispatch(CommonActions.navigate('DetailScreen', movie))
       }
+      // navigation.navigate('DetailScreen' as never, movie as never)
+
       activeOpacity={0.8}
       style={{width, height, marginHorizontal: 8}}>
       <View style={styles.imageContainer}>
