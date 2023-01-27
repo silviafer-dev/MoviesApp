@@ -11,7 +11,7 @@ import {useMovies} from '../hooks/useMovies';
 const {width: windowWidth} = Dimensions.get('window');
 
 export const HomeScreen = () => {
-  const {peliculasEnCine, isLoading, peliculasPopulares} = useMovies();
+  const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
 
   if (isLoading) {
@@ -44,12 +44,14 @@ export const HomeScreen = () => {
               // How big the adjacent items will look compared to the "main" item
               parallaxAdjacentItemScale: 0.75,
             }}
-            data={peliculasEnCine}
+            data={nowPlaying}
             renderItem={({item}) => <MoviePoster movie={item} />}
           />
         </View>
 
-        <HorizontalSlider title="Populares" movies={peliculasPopulares} />
+        <HorizontalSlider title="Popular" movies={popular} />
+        <HorizontalSlider title="Top Rated" movies={topRated} />
+        <HorizontalSlider title="Upcoming" movies={upcoming} />
       </View>
     </ScrollView>
   );
