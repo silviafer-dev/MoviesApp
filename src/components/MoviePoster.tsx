@@ -4,8 +4,8 @@ import {View, Image, StyleSheet} from 'react-native';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Movie} from '../interfaces/movieInterface';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParams} from 'src/navigation/Navigation';
+// import {StackNavigationProp} from '@react-navigation/stack';
+// import {RootStackParams} from 'src/navigation/Navigation';
 
 interface Props {
   movie: Movie;
@@ -27,9 +27,17 @@ export const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
       // navigation.navigate('DetailScreen' as never, movie as never)
 
       activeOpacity={0.8}
-      style={{width, height, marginHorizontal: 8}}>
+      style={{
+        width,
+        height,
+        marginHorizontal: 2,
+        paddingBottom: 20,
+        paddingHorizontal: 7,
+      }}>
       <View style={styles.imageContainer}>
-        <Image source={{uri}} style={styles.image} />
+        <View style={styles.imageBorder}>
+          <Image source={{uri}} style={styles.image} />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -43,6 +51,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     borderRadius: 18,
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -52,5 +61,13 @@ const styles = StyleSheet.create({
     shadowRadius: 10.32,
 
     elevation: 16,
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
+  },
+  imageBorder: {
+    flex: 1,
+    overflow: 'hidden',
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
   },
 });
