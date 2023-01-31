@@ -1,10 +1,17 @@
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {View, StyleSheet, Image, Dimensions, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {RootStackParams} from '../navigation/Navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {useMovieDetails} from '../hooks/useMovieDetails';
+import {MovieDetails} from '../components/MovieDetails';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -16,8 +23,6 @@ export const DetailScreen = ({route}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const {isLoading, cast, movieFull} = useMovieDetails(movie.id);
 
-  console.log({cast});
-
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
@@ -28,9 +33,11 @@ export const DetailScreen = ({route}: Props) => {
         <Text style={styles.subTitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
       </View>
-      <View style={styles.marginContainer}>
-        <Icon name="star-outline" color="grey" size={20} />
-      </View>
+      {isLoading ? (
+        <ActivityIndicator size={30} />
+      ) : (
+        <MovieDetails movieFull={movieFull!} cast={cast} />
+      )}
     </ScrollView>
   );
 };
@@ -57,7 +64,7 @@ const styles = StyleSheet.create({
   },
   marginContainer: {
     marginTop: 20,
-    paddingLeft: 20,
+    marginHorizontal: 20,
   },
   subTitle: {
     fontSize: 16,
