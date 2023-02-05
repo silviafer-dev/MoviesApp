@@ -1,4 +1,4 @@
-import {StackScreenProps} from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import {
   View,
@@ -7,26 +7,28 @@ import {
   Dimensions,
   Text,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {RootStackParams} from '../navigation/Navigation';
-import {useMovieDetails} from '../hooks/useMovieDetails';
-import {MovieDetails} from '../components/MovieDetails';
+import { ScrollView } from 'react-native-gesture-handler';
+import { RootStackParams } from '../navigation/Navigation';
+import { useMovieDetails } from '../hooks/useMovieDetails';
+import { MovieDetails } from '../components/MovieDetails';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const screenHeight = Dimensions.get('screen').height;
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 
-export const DetailScreen = ({route}: Props) => {
+export const DetailScreen = ({ route, navigation }: Props) => {
   const movie = route.params;
 
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  const {isLoading, cast, movieFull} = useMovieDetails(movie.id);
+  const { isLoading, cast, movieFull } = useMovieDetails(movie.id);
 
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
-        <Image source={{uri}} style={styles.posterImage} />
+        <Image source={{ uri }} style={styles.posterImage} />
       </View>
 
       <View style={styles.marginContainer}>
@@ -38,6 +40,11 @@ export const DetailScreen = ({route}: Props) => {
       ) : (
         <MovieDetails movieFull={movieFull!} cast={cast} />
       )}
+      <View style={styles.backBottom}>
+        <TouchableOpacity onPress={() => navigation.pop()}>
+          <Icon name="arrow-back-outline" color="white" size={60} />
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -75,5 +82,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
+  },
+  backBottom: {
+    position: 'absolute',
+    top: 30,
+    left: 5,
   },
 });
