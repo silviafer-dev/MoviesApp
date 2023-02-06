@@ -5,7 +5,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GradientBackground } from '../components/GradientBackground';
 import { HorizontalSlider } from '../components/HorizontalSlider';
-
+import ImageColors from 'react-native-image-colors';
 import { MoviePoster } from '../components/MoviePoster';
 import { useMovies } from '../hooks/useMovies';
 
@@ -14,6 +14,13 @@ const { width: windowWidth } = Dimensions.get('window');
 export const HomeScreen = () => {
   const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
   const { top } = useSafeAreaInsets();
+
+  const getPosterColor = async (index: number) => {
+    const movie = nowPlaying[index];
+    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    const colors = await ImageColors.getColors(uri, {});
+    console.log(colors);
+  };
 
   if (isLoading) {
     return (
@@ -48,6 +55,7 @@ export const HomeScreen = () => {
               }}
               data={nowPlaying}
               renderItem={({ item }) => <MoviePoster movie={item} />}
+              onSnapToItem={index => getPosterColor(index)}
             />
           </View>
 
