@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react';
 import { View, ActivityIndicator, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,6 +10,7 @@ import { MoviePoster } from '../components/MoviePoster';
 import { useMovies } from '../hooks/useMovies';
 import { getImageColor } from '../helpers/getColors';
 import { GradientContext } from '../context/GradientContext';
+import { useEffect } from 'react';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -25,6 +27,12 @@ export const HomeScreen = () => {
 
     setMainColors({ primary, secondary });
   };
+
+  useEffect(() => {
+    if (nowPlaying.length > 0) {
+      getPosterColor(0);
+    }
+  }, [nowPlaying]);
 
   if (isLoading) {
     return (
