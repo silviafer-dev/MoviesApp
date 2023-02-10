@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import movieDB from '../api/movieDB';
+import { movieDB } from '../api/movieDB';
 import { MovieFull } from '../interfaces/movieInterface';
 import { CreditsResponse, Cast } from '../interfaces/creditsInterface';
 

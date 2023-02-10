@@ -1,9 +1,9 @@
-import {CommonActions, useNavigation} from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Movie} from '../interfaces/movieInterface';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Movie } from '../interfaces/movieInterface';
 // import {StackNavigationProp} from '@react-navigation/stack';
 // import {RootStackParams} from 'src/navigation/Navigation';
 
@@ -13,7 +13,7 @@ interface Props {
   width?: number;
 }
 
-export const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
+export const MoviePoster = ({ movie, height = 420, width = 300 }: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   const navigation = useNavigation();
@@ -36,7 +36,7 @@ export const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
       }}>
       <View style={styles.imageContainer}>
         <View style={styles.imageBorder}>
-          <Image source={{uri}} style={styles.image} />
+          <Image source={{ uri }} style={styles.image} />
         </View>
       </View>
     </TouchableOpacity>
