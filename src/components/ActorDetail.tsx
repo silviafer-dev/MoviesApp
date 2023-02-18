@@ -1,51 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ActorDetails } from '../interfaces/actorInterface';
+import { Biography } from './Biography';
 
 interface Props {
   castFull: ActorDetails;
 }
 
 export const ActorDetail = ({ castFull }: Props) => {
-  const [bioLength, setBioLength] = useState(250);
-
-  const Biography = ({ castFullB }: { castFullB: ActorDetails }) => {
-    return (
-      <View>
-        <Text style={styles.textBio}>
-          {bioLength >= castFullB.biography.length
-            ? castFullB.biography
-            : castFullB.biography.slice(0, bioLength - 1) + '(…)'}
-        </Text>
-        {bioLength < castFull.biography.length ? (
-          <TouchableOpacity
-            style={{ marginBottom: 30 }}
-            onPress={() => {
-              setBioLength(castFull.biography.length);
-            }}>
-            <Text style={{ ...styles.textBio, fontWeight: 'bold' }}>
-              ...Ver más
-            </Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={{ marginBottom: 30 }}
-            onPress={() => {
-              setBioLength(250);
-            }}>
-            <Text
-              style={{
-                ...styles.textBio,
-                fontWeight: 'bold',
-              }}>
-              ...Ver menos
-            </Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    );
-  };
-
   return (
     <View style={{ marginHorizontal: 20 }}>
       <View>
@@ -94,9 +56,5 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  textBio: {
-    color: 'black',
-    fontSize: 16,
   },
 });
