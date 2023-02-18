@@ -19,6 +19,7 @@ export const ActorDetail = ({ castFull }: Props) => {
         </Text>
         {bioLength < castFull.biography.length ? (
           <TouchableOpacity
+            style={{ marginBottom: 30 }}
             onPress={() => {
               setBioLength(castFull.biography.length);
             }}>
@@ -28,10 +29,15 @@ export const ActorDetail = ({ castFull }: Props) => {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
+            style={{ marginBottom: 30 }}
             onPress={() => {
               setBioLength(250);
             }}>
-            <Text style={{ ...styles.textBio, fontWeight: 'bold' }}>
+            <Text
+              style={{
+                ...styles.textBio,
+                fontWeight: 'bold',
+              }}>
               ...Ver menos
             </Text>
           </TouchableOpacity>
