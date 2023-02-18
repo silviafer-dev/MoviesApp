@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ActorDetails } from '../interfaces/actorInterface';
 
 interface Props {
@@ -7,36 +7,46 @@ interface Props {
 }
 
 export const ActorDetail = ({ castFull }: Props) => {
+  const [bioLength, setBioLength] = useState(250);
+
+  const Biography = ({ castFullB }: { castFullB: ActorDetails }) => {
+    return (
+      <View>
+        <Text style={styles.textBio}>
+          {bioLength >= castFullB.biography.length
+            ? castFullB.biography
+            : castFullB.biography.slice(0, bioLength - 1) + '(…)'}
+        </Text>
+        {bioLength < castFull.biography.length ? (
+          <TouchableOpacity
+            onPress={() => {
+              setBioLength(castFull.biography.length);
+            }}>
+            <Text style={{ ...styles.textBio, fontWeight: 'bold' }}>
+              ...Ver más
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              setBioLength(250);
+            }}>
+            <Text style={{ ...styles.textBio, fontWeight: 'bold' }}>
+              ...Ver menos
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  };
+
   return (
     <View style={{ marginHorizontal: 20 }}>
       <View>
-        <Text
-          style={{
-            fontSize: 14,
-            marginTop: 30,
-            fontWeight: 'bold',
-            color: 'black',
-            marginHorizontal: 15,
-          }}>
-          {castFull.also_known_as[0]}
-        </Text>
-        <Text
-          style={{
-            fontSize: 20,
-            marginTop: 10,
-            fontWeight: 'bold',
-            color: 'black',
-            marginHorizontal: 15,
-          }}>
-          {castFull.name}
-        </Text>
+        <Text style={styles.alsoKnown}>{castFull.also_known_as[0]}</Text>
+        <Text style={styles.name}>{castFull.name}</Text>
         <Text style={{ marginHorizontal: 15 }}>{castFull.place_of_birth}</Text>
-        <View
-          style={{
-            marginHorizontal: 15,
-            flexDirection: 'row',
-            marginBottom: 20,
-          }}>
+        <View style={styles.date}>
           <Text>{castFull.birthday.split('-').reverse().join('-')}</Text>
           {castFull.deathday && (
             <Text> / {castFull.deathday.split('-').reverse().join('-')}</Text>
@@ -45,24 +55,42 @@ export const ActorDetail = ({ castFull }: Props) => {
       </View>
       {castFull.biography && (
         <View>
-          <Text
-            style={{
-              color: 'black',
-              fontSize: 20,
-              fontWeight: 'bold',
-            }}>
-            Biografía
-          </Text>
-          <Text
-            style={{
-              color: 'black',
-              fontSize: 16,
-              marginBottom: 40,
-            }}>
-            {castFull.biography}
-          </Text>
+          <Text style={styles.titleText}>Biografía</Text>
+
+          <Biography castFullB={castFull} />
         </View>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  name: {
+    fontSize: 20,
+    marginTop: 10,
+    fontWeight: 'bold',
+    color: 'black',
+    marginHorizontal: 15,
+  },
+  alsoKnown: {
+    fontSize: 14,
+    marginTop: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    marginHorizontal: 15,
+  },
+  date: {
+    marginHorizontal: 15,
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  titleText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  textBio: {
+    color: 'black',
+    fontSize: 16,
+  },
+});
