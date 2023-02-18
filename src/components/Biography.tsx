@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { ActorDetails } from '../interfaces/actorInterface';
 
-export const Biography = ({ castFullB }: { castFullB: ActorDetails }) => {
+export const Biography = ({ castFull }: { castFull: ActorDetails }) => {
   const [bioLength, setBioLength] = useState(250);
 
   return (
     <View>
       <Text style={styles.textBio}>
-        {bioLength >= castFullB.biography.length
-          ? castFullB.biography
-          : castFullB.biography.slice(0, bioLength - 1) + '(…)'}
+        {bioLength >= castFull.biography.length
+          ? castFull.biography
+          : castFull.biography.slice(0, bioLength) + '(…)'}
       </Text>
-      {bioLength < castFullB.biography.length ? (
+      {bioLength < castFull.biography.length ? (
         <TouchableOpacity
           style={{ marginBottom: 30 }}
           onPress={() => {
-            setBioLength(castFullB.biography.length);
+            setBioLength(castFull.biography.length);
           }}>
           <Text style={{ ...styles.textBio, fontWeight: 'bold' }}>
             ...Ver más

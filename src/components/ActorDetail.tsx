@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { ActorDetails } from '../interfaces/actorInterface';
 import { Biography } from './Biography';
 
@@ -25,7 +25,7 @@ export const ActorDetail = ({ castFull }: Props) => {
         <View>
           <Text style={styles.titleText}>Biografía</Text>
 
-          <Biography castFullB={castFull} />
+          <Biography castFull={castFull} />
         </View>
       )}
     </View>
